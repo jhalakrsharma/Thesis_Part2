@@ -1,0 +1,173 @@
+import pandas as pd
+import os
+import csv
+import subprocess
+import random
+import glob
+from tqdm import tqdm
+
+final_compare = pd.DataFrame()
+
+final_compare= pd.read_csv("inter_sim1_2.csv", dtype=str)
+#--------------------------------------------------------
+final_compare.dropna(axis = 0, how = "any", inplace=True)
+final_compare.reset_index(drop=True, inplace=True)
+
+
+# print(type(final_compare["cpuregs[3]"][0]))
+# print(type(final_compare["cpuregs[3]_g"][0]))
+
+# print(final_compare["cpuregs[3]"])
+# print(final_compare["cpuregs[3]_g"])
+# print(final_compare["cpuregs[3]"] != final_compare["cpuregs[3]_g"])
+
+cpuregs_1_Comp = final_compare["cpuregs[1]"] != final_compare["cpuregs[1]_g"]
+cpuregs_1_Comp = cpuregs_1_Comp.astype(int)
+cpuregs_2_Comp = final_compare["cpuregs[2]"] != final_compare["cpuregs[2]_g"]
+cpuregs_2_Comp = cpuregs_2_Comp.astype(int)
+cpuregs_3_Comp = final_compare["cpuregs[3]"] != final_compare["cpuregs[3]_g"]
+cpuregs_3_Comp = cpuregs_3_Comp.astype(int)
+cpuregs_4_Comp = final_compare["cpuregs[4]"] != final_compare["cpuregs[4]_g"]
+cpuregs_4_Comp = cpuregs_4_Comp.astype(int)
+cpuregs_5_Comp = final_compare["cpuregs[5]"] != final_compare["cpuregs[5]_g"]
+cpuregs_5_Comp = cpuregs_5_Comp.astype(int)
+cpuregs_6_Comp = final_compare["cpuregs[6]"] != final_compare["cpuregs[6]_g"]
+cpuregs_6_Comp = cpuregs_6_Comp.astype(int)
+cpuregs_7_Comp = final_compare["cpuregs[7]"] != final_compare["cpuregs[7]_g"]
+cpuregs_7_Comp = cpuregs_7_Comp.astype(int)
+
+#----------------
+#memory values
+
+memory_0_Comp = final_compare["memory[0]"].astype(str).str.strip() != final_compare["memory[0]_g"].astype(str).str.strip()
+memory_0_Comp = memory_0_Comp.astype(int)
+memory_1_Comp = final_compare["memory[1]"].astype(str).str.strip() != final_compare["memory[1]_g"].astype(str).str.strip()
+memory_1_Comp = memory_1_Comp.astype(int)
+memory_2_Comp = final_compare["memory[2]"].astype(str).str.strip() != final_compare["memory[2]_g"].astype(str).str.strip()
+memory_2_Comp = memory_2_Comp.astype(int)
+memory_3_Comp = final_compare["memory[3]"].astype(str).str.strip() != final_compare["memory[3]_g"].astype(str).str.strip()
+memory_3_Comp = memory_3_Comp.astype(int)
+memory_4_Comp = final_compare["memory[4]"].astype(str).str.strip() != final_compare["memory[4]_g"].astype(str).str.strip()
+memory_4_Comp = memory_4_Comp.astype(int)
+memory_5_Comp = final_compare["memory[5]"].astype(str).str.strip() != final_compare["memory[5]_g"].astype(str).str.strip()
+memory_5_Comp = memory_5_Comp.astype(int)
+memory_6_Comp = final_compare["memory[6]"].astype(str).str.strip() != final_compare["memory[6]_g"].astype(str).str.strip()
+memory_6_Comp = memory_6_Comp.astype(int)
+memory_7_Comp = final_compare["memory[7]"].astype(str).str.strip() != final_compare["memory[7]_g"].astype(str).str.strip()
+memory_7_Comp = memory_7_Comp.astype(int)
+memory_8_Comp = final_compare["memory[8]"].astype(str).str.strip() != final_compare["memory[8]_g"].astype(str).str.strip()
+memory_8_Comp = memory_8_Comp.astype(int)
+memory_9_Comp = final_compare["memory[9]"].astype(str).str.strip() != final_compare["memory[9]_g"].astype(str).str.strip()
+memory_9_Comp = memory_9_Comp.astype(int)
+memory_10_Comp = final_compare["memory[10]"].astype(str).str.strip() != final_compare["memory[10]_g"].astype(str).str.strip()
+memory_10_Comp = memory_10_Comp.astype(int)
+memory_11_Comp = final_compare["memory[11]"].astype(str).str.strip() != final_compare["memory[11]_g"].astype(str).str.strip()
+memory_11_Comp = memory_11_Comp.astype(int)
+memory_12_Comp = final_compare["memory[12]"].astype(str).str.strip() != final_compare["memory[12]_g"].astype(str).str.strip()
+memory_12_Comp = memory_12_Comp.astype(int)
+memory_13_Comp = final_compare["memory[13]"].astype(str).str.strip() != final_compare["memory[13]_g"].astype(str).str.strip()
+memory_13_Comp = memory_13_Comp.astype(int)
+memory_14_Comp = final_compare["memory[14]"].astype(str).str.strip() != final_compare["memory[14]_g"].astype(str).str.strip()
+memory_14_Comp = memory_14_Comp.astype(int)
+memory_15_Comp = final_compare["memory[15]"].astype(str).str.strip() != final_compare["memory[15]_g"].astype(str).str.strip()
+memory_15_Comp = memory_15_Comp.astype(int)
+memory_16_Comp = final_compare["memory[16]"].astype(str).str.strip() != final_compare["memory[16]_g"].astype(str).str.strip()
+memory_16_Comp = memory_16_Comp.astype(int)
+memory_17_Comp = final_compare["memory[17]"].astype(str).str.strip() != final_compare["memory[17]_g"].astype(str).str.strip()
+memory_17_Comp = memory_17_Comp.astype(int)
+memory_18_Comp = final_compare["memory[18]"].astype(str).str.strip() != final_compare["memory[18]_g"].astype(str).str.strip()
+memory_18_Comp = memory_18_Comp.astype(int)
+memory_19_Comp = final_compare["memory[19]"].astype(str).str.strip() != final_compare["memory[19]_g"].astype(str).str.strip()
+memory_19_Comp = memory_19_Comp.astype(int)
+memory_20_Comp = final_compare["memory[20]"].astype(str).str.strip() != final_compare["memory[20]_g"].astype(str).str.strip()
+memory_20_Comp = memory_20_Comp.astype(int)
+memory_21_Comp = final_compare["memory[21]"].astype(str).str.strip() != final_compare["memory[21]_g"].astype(str).str.strip()
+memory_21_Comp = memory_21_Comp.astype(int)
+memory_22_Comp = final_compare["memory[22]"].astype(str).str.strip() != final_compare["memory[22]_g"].astype(str).str.strip()
+memory_22_Comp = memory_22_Comp.astype(int)
+memory_23_Comp = final_compare["memory[23]"].astype(str).str.strip() != final_compare["memory[23]_g"].astype(str).str.strip()
+memory_23_Comp = memory_23_Comp.astype(int)
+memory_24_Comp = final_compare["memory[24]"].astype(str).str.strip() != final_compare["memory[24]_g"].astype(str).str.strip()
+memory_24_Comp = memory_24_Comp.astype(int)
+memory_25_Comp = final_compare["memory[25]"].astype(str).str.strip() != final_compare["memory[25]_g"].astype(str).str.strip()
+memory_25_Comp = memory_25_Comp.astype(int)
+memory_26_Comp = final_compare["memory[26]"].astype(str).str.strip() != final_compare["memory[26]_g"].astype(str).str.strip()
+memory_26_Comp = memory_26_Comp.astype(int)
+memory_27_Comp = final_compare["memory[27]"].astype(str).str.strip() != final_compare["memory[27]_g"].astype(str).str.strip()
+memory_27_Comp = memory_27_Comp.astype(int)
+memory_28_Comp = final_compare["memory[28]"].astype(str).str.strip() != final_compare["memory[28]_g"].astype(str).str.strip()
+memory_28_Comp = memory_28_Comp.astype(int)
+memory_29_Comp = final_compare["memory[29]"].astype(str).str.strip() != final_compare["memory[29]_g"].astype(str).str.strip()
+memory_29_Comp = memory_29_Comp.astype(int)
+memory_30_Comp = final_compare["memory[30]"].astype(str).str.strip() != final_compare["memory[30]_g"].astype(str).str.strip()
+memory_30_Comp = memory_30_Comp.astype(int)
+memory_31_Comp = final_compare["memory[31]"].astype(str).str.strip() != final_compare["memory[31]_g"].astype(str).str.strip()
+memory_31_Comp = memory_31_Comp.astype(int)
+memory_32_Comp = final_compare["memory[32]"].astype(str).str.strip() != final_compare["memory[32]_g"].astype(str).str.strip()
+memory_32_Comp = memory_32_Comp.astype(int)
+memory_33_Comp = final_compare["memory[33]"].astype(str).str.strip() != final_compare["memory[33]_g"].astype(str).str.strip()
+memory_33_Comp = memory_33_Comp.astype(int)
+memory_34_Comp = final_compare["memory[34]"].astype(str).str.strip() != final_compare["memory[34]_g"].astype(str).str.strip()
+memory_34_Comp = memory_34_Comp.astype(int)
+memory_35_Comp = final_compare["memory[35]"].astype(str).str.strip() != final_compare["memory[35]_g"].astype(str).str.strip()
+memory_35_Comp = memory_35_Comp.astype(int)
+memory_36_Comp = final_compare["memory[36]"].astype(str).str.strip() != final_compare["memory[36]_g"].astype(str).str.strip()
+memory_36_Comp = memory_36_Comp.astype(int)
+memory_37_Comp = final_compare["memory[37]"].astype(str).str.strip() != final_compare["memory[37]_g"].astype(str).str.strip()
+memory_37_Comp = memory_37_Comp.astype(int)
+
+#------------------------------------------------------------------------------------------------------------------------
+
+final_compare = final_compare.assign(cpuregs_1_Comp = cpuregs_1_Comp.values)
+final_compare = final_compare.assign(cpuregs_2_Comp = cpuregs_2_Comp.values)
+final_compare = final_compare.assign(cpuregs_3_Comp = cpuregs_3_Comp.values)
+final_compare = final_compare.assign(cpuregs_4_Comp = cpuregs_4_Comp.values)
+final_compare = final_compare.assign(cpuregs_5_Comp = cpuregs_5_Comp.values)
+final_compare = final_compare.assign(cpuregs_6_Comp = cpuregs_6_Comp.values)
+final_compare = final_compare.assign(cpuregs_7_Comp = cpuregs_7_Comp.values)
+
+final_compare = final_compare.assign(memory_0_Comp = memory_0_Comp.values)
+final_compare = final_compare.assign(memory_1_Comp = memory_1_Comp.values)
+final_compare = final_compare.assign(memory_2_Comp = memory_2_Comp.values)
+final_compare = final_compare.assign(memory_3_Comp = memory_3_Comp.values)
+final_compare = final_compare.assign(memory_4_Comp = memory_4_Comp.values)
+final_compare = final_compare.assign(memory_5_Comp = memory_5_Comp.values)
+final_compare = final_compare.assign(memory_6_Comp = memory_6_Comp.values)
+final_compare = final_compare.assign(memory_7_Comp = memory_7_Comp.values)
+final_compare = final_compare.assign(memory_8_Comp = memory_8_Comp.values)
+final_compare = final_compare.assign(memory_9_Comp = memory_9_Comp.values)
+final_compare = final_compare.assign(memory_10_Comp = memory_10_Comp.values)
+final_compare = final_compare.assign(memory_11_Comp = memory_11_Comp.values)
+final_compare = final_compare.assign(memory_12_Comp = memory_12_Comp.values)
+final_compare = final_compare.assign(memory_13_Comp = memory_13_Comp.values)
+final_compare = final_compare.assign(memory_14_Comp = memory_14_Comp.values)
+final_compare = final_compare.assign(memory_15_Comp = memory_15_Comp.values)
+final_compare = final_compare.assign(memory_16_Comp = memory_16_Comp.values)
+final_compare = final_compare.assign(memory_17_Comp = memory_17_Comp.values)
+final_compare = final_compare.assign(memory_18_Comp = memory_18_Comp.values)
+final_compare = final_compare.assign(memory_19_Comp = memory_19_Comp.values)
+final_compare = final_compare.assign(memory_20_Comp = memory_20_Comp.values)
+final_compare = final_compare.assign(memory_21_Comp = memory_21_Comp.values)
+final_compare = final_compare.assign(memory_22_Comp = memory_22_Comp.values)
+final_compare = final_compare.assign(memory_23_Comp = memory_23_Comp.values)
+final_compare = final_compare.assign(memory_24_Comp = memory_24_Comp.values)
+final_compare = final_compare.assign(memory_25_Comp = memory_25_Comp.values)
+final_compare = final_compare.assign(memory_26_Comp = memory_26_Comp.values)
+final_compare = final_compare.assign(memory_27_Comp = memory_27_Comp.values)
+final_compare = final_compare.assign(memory_28_Comp = memory_28_Comp.values)
+final_compare = final_compare.assign(memory_29_Comp = memory_29_Comp.values)
+final_compare = final_compare.assign(memory_30_Comp = memory_30_Comp.values)
+final_compare = final_compare.assign(memory_31_Comp = memory_31_Comp.values)
+final_compare = final_compare.assign(memory_32_Comp = memory_32_Comp.values)
+final_compare = final_compare.assign(memory_33_Comp = memory_33_Comp.values)
+final_compare = final_compare.assign(memory_34_Comp = memory_34_Comp.values)
+final_compare = final_compare.assign(memory_35_Comp = memory_35_Comp.values)
+final_compare = final_compare.assign(memory_36_Comp = memory_36_Comp.values)
+final_compare = final_compare.assign(memory_37_Comp = memory_37_Comp.values)
+
+#final_compare["M/S"] = final_compare["memory_127_Comp"] + final_compare["memory_250_Comp"]
+final_compare["M/S"] = final_compare["cpuregs_1_Comp"]+final_compare["cpuregs_2_Comp"] + final_compare["cpuregs_3_Comp"] +final_compare["cpuregs_4_Comp"] +final_compare["cpuregs_5_Comp"] +final_compare["cpuregs_6_Comp"] +final_compare["cpuregs_7_Comp"] +final_compare["memory_0_Comp"]+final_compare["memory_1_Comp"]+final_compare["memory_2_Comp"] + final_compare["memory_3_Comp"] +final_compare["memory_4_Comp"] +final_compare["memory_5_Comp"] +final_compare["memory_6_Comp"] +final_compare["memory_7_Comp"] +final_compare["memory_8_Comp"] +final_compare["memory_9_Comp"] +final_compare["memory_10_Comp"] +final_compare["memory_11_Comp"] +final_compare["memory_12_Comp"] +final_compare["memory_13_Comp"] +final_compare["memory_14_Comp"] +final_compare["memory_15_Comp"] +final_compare["memory_16_Comp"]+final_compare["memory_17_Comp"]+final_compare["memory_18_Comp"]+final_compare["memory_19_Comp"] +final_compare["memory_20_Comp"]+final_compare["memory_21_Comp"]+final_compare["memory_22_Comp"]+final_compare["memory_23_Comp"] +final_compare["memory_24_Comp"]+final_compare["memory_25_Comp"]+final_compare["memory_26_Comp"]+final_compare["memory_27_Comp"] +final_compare["memory_28_Comp"]+final_compare["memory_29_Comp"]+final_compare["memory_30_Comp"]+final_compare["memory_31_Comp"] +final_compare["memory_32_Comp"]+final_compare["memory_33_Comp"]+final_compare["memory_34_Comp"]+final_compare["memory_35_Comp"] +final_compare["memory_36_Comp"] +final_compare["memory_37_Comp"]
+# final_compare.loc[final_compare['identifier'].duplicated(), 'identifier'] = ''
+# print(final_compare)
+# print(final_compare.head())
+final_compare.to_csv("compare_with_regs_sim1_2.csv", index= False)
